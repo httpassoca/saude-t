@@ -50,7 +50,7 @@
 		Compilação de Posts feito no canal <a
 			class="text-white border-solid border-b-2 border-sky-500"
 			href="https://t.me/SAUDETRADICIONAL">Saúde Tradicional</a
-		>
+		> até 16/10/2023
 	</p>
 
 	<div class="flex flex-col md:flex-row gap-2 md:gap-4 mt-2">
@@ -68,7 +68,7 @@
 		<div class="grow-0">
 			<button
 				on:click={toggleOrder}
-				class="flex h-12 mt-6 bg-sky-600 text-white items-center gap-2 justify-center p-4"
+				class="flex h-12 mt-0 md:mt-6 bg-sky-600 text-white items-center gap-2 justify-center p-4"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
