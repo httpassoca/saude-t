@@ -23,6 +23,7 @@
 		let lightbox = new PhotoSwipeLightbox({
 			gallery: '#msg' + message.id,
 			children: 'a',
+			showHideAnimationType: 'zoom',
 			pswpModule: () => import('photoswipe')
 		});
 		lightbox.init();
@@ -34,9 +35,14 @@
 		class="pswp-gallery flex gap-1 max-w-full overflow-x-auto"
 		id={'msg' + message.id.toString()}
 	>
-		{#each message.photoLinks as image}
-			<a href={imageUrlPath + image.replace('_thumb', '')} rel="noreferrer">
-				<img src={imageUrlPath + image} alt="" />
+		{#each message.photos as image}
+			<a
+				href={imageUrlPath + image.link.replace('_thumb', '')}
+				data-pswp-width={image.width}
+				data-pswp-height={image.height}
+				rel="noreferrer"
+			>
+				<img src={imageUrlPath + image.link} alt="" />
 			</a>
 		{/each}
 	</div>
