@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Message from '../lib/Message.svelte';
 
-	import { messages } from '../../public/posts.json';
+	import messages from '../../public/posts.json';
 	let searchText = '';
 	let tagFiltered = '';
 	let isInverted = false;
@@ -37,18 +37,22 @@
 	const isMessageMatchingSearch = (message: any) => {
 		if (!searchText) return true;
 		return Object.values(message).some(
-			(value) => typeof value === 'string' && value.includes(searchText)
+			(value) =>
+				typeof value === 'string' &&
+				value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
 		);
 	};
 </script>
 
 <div class="container">
 	<h1 class="text-3xl my-4">Saúde Tradicional Postagens</h1>
+	<p>Compilação de Posts feito no canal <a href="">Saúde Tradicional</a></p>
 
 	<div class="flex flex-col md:flex-row gap-2 md:gap-4items-start">
 		<label class="text-sm grow">
 			Filtre por uma tag:
 			<select bind:value={tagFiltered} class="h-12">
+				<option value={''} selected>Todas</option>
 				{#each [...new Set(messages.flatMap((msg) => msg.tags))] as tag}
 					<option value={tag}>{tag}</option>
 				{/each}

@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import type { messages } from '../../public/posts.json';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import type messages from '../../public/posts.json';
 	import { parseCustomDate } from './utils';
+	import 'photoswipe/style.css';
+	import PhotoSwipeLightbox from 'photoswipe/lightbox';
+
 	type IMessage = (typeof messages)[0];
 	export let message: IMessage;
 
@@ -15,12 +18,26 @@
 	const imageUrlPath = `${
 		import.meta.env.VITE_SUPABASE_URL
 	}/storage/v1/object/public/posts_images/`;
+
+	onMount(() => {
+		let lightbox = new PhotoSwipeLightbox({
+			gallery: '#msg' + message.id,
+			children: 'a',
+			pswpModule: () => import('photoswipe')
+		});
+		lightbox.init();
+	});
 </script>
 
 <article class="message">
-	<div class="flex gap-1 max-w-full overflow-x-auto">
-		{#each message.photoLinks as photo}
-			<img src={imageUrlPath + photo} alt="Photo" />
+	<div
+		class="pswp-gallery flex gap-1 max-w-full overflow-x-auto"
+		id={'msg' + message.id.toString()}
+	>
+		{#each message.photoLinks as image}
+			<a href={imageUrlPath + image.replace('_thumb', '')} rel="noreferrer">
+				<img src={imageUrlPath + image} alt="" />
+			</a>
 		{/each}
 	</div>
 
