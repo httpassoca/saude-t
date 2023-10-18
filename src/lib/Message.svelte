@@ -12,12 +12,15 @@
 	}
 
 	const date = parseCustomDate(message.date);
+	const imageUrlPath = `${
+		import.meta.env.VITE_SUPABASE_URL
+	}/storage/v1/object/public/posts_images/`;
 </script>
 
 <article class="message">
 	<div class="flex gap-1 max-w-full overflow-x-auto">
 		{#each message.photoLinks as photo}
-			<img src={'https://picsum.photos/200/300'} alt="Photo" />
+			<img src={imageUrlPath + photo} alt="Photo" />
 		{/each}
 	</div>
 
