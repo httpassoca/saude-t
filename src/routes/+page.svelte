@@ -44,14 +44,19 @@
 	};
 </script>
 
-<div class="container">
+<div class="container max-w-[768px]">
 	<h1 class="text-3xl my-4">Saúde Tradicional Postagens</h1>
-	<p>Compilação de Posts feito no canal <a href="">Saúde Tradicional</a></p>
+	<p>
+		Compilação de Posts feito no canal <a
+			class="text-white border-solid border-b-2 border-sky-500"
+			href="https://t.me/SAUDETRADICIONAL">Saúde Tradicional</a
+		>
+	</p>
 
-	<div class="flex flex-col md:flex-row gap-2 md:gap-4items-start">
+	<div class="flex flex-col md:flex-row gap-2 md:gap-4 mt-2">
 		<label class="text-sm grow">
 			Filtre por uma tag:
-			<select bind:value={tagFiltered} class="h-12">
+			<select bind:value={tagFiltered} class="h-12 mt-1">
 				<option value={''} selected>Todas</option>
 				{#each [...new Set(messages.flatMap((msg) => msg.tags))] as tag}
 					<option value={tag}>{tag}</option>
@@ -59,16 +64,11 @@
 			</select>
 		</label>
 
-		<label class="text-sm grow">
-			Busca:
-			<input type="text" on:input={setSearchTextWithDebounce} placeholder="Digite para buscar..." />
-		</label>
-
 		<!-- Button to toggle order -->
 		<div class="grow-0">
 			<button
 				on:click={toggleOrder}
-				class="flex h-12 md:mt-5 bg-sky-600 text-white items-center gap-2 justify-center px-4"
+				class="flex h-12 mt-6 bg-sky-600 text-white items-center gap-2 justify-center p-4"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -85,10 +85,20 @@
 					/>
 				</svg>
 
-				Alterar ordem
+				Ordem
 			</button>
 		</div>
 	</div>
+
+	<label class="text-sm mt-2">
+		Busca:
+		<input
+			type="search"
+			class="mt-1"
+			on:input={setSearchTextWithDebounce}
+			placeholder="Digite para buscar..."
+		/>
+	</label>
 	<div id="messages">
 		{#each filteredMessages as message}
 			<Message on:filterByTag={setFilter} {message} />

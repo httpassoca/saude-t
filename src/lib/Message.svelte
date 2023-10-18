@@ -11,6 +11,7 @@
 	const dispatch = createEventDispatcher();
 
 	function filterByTag(tag: string) {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 		dispatch('filterByTag', { tag });
 	}
 
@@ -32,7 +33,7 @@
 
 <article class="message">
 	<div
-		class="pswp-gallery flex gap-1 max-w-full overflow-x-auto"
+		class="pswp-gallery flex gap-1 max-w-full overflow-x-auto justify-center"
 		id={'msg' + message.id.toString()}
 	>
 		{#each message.photos as image}
@@ -42,12 +43,12 @@
 				data-pswp-height={image.height}
 				rel="noreferrer"
 			>
-				<img src={imageUrlPath + image.link} alt="" />
+				<img src={imageUrlPath + image.link} alt="" class="drop-shadow-xl rounded-md" />
 			</a>
 		{/each}
 	</div>
 
-	<div class="mt-2">{@html message.text.replaceAll('\n', '<br/>')}</div>
+	<div class="mt-3">{@html message.text.replaceAll('\n', '<br/>')}</div>
 	<small class="mt-2 italic text-gray-500">
 		Post feito em {date.toLocaleDateString('pt-BR')} por {message.author} às {date
 			.toLocaleTimeString('pt-BR')
