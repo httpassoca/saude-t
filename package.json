@@ -30,6 +30,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@supabase/supabase-js": "^2.38.1"
+    "@supabase/supabase-js": "^2.38.1",
+    "@sveltejs/adapter-vercel": "^3.0.3"
   }
 }
