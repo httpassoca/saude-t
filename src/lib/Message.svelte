@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import type { messages } from '../../public/posts.json';
+	import { parseCustomDate } from './utils';
 	type IMessage = (typeof messages)[0];
 	export let message: IMessage;
 
@@ -10,7 +11,7 @@
 		dispatch('filterByTag', { tag });
 	}
 
-	const date = new Date(message.date);
+	const date = parseCustomDate(message.date);
 </script>
 
 <article class="message">
