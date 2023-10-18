@@ -15,13 +15,13 @@
 </script>
 
 <article class="message">
-	<div class="photos">
+	<div class="flex gap-1 max-w-full overflow-x-auto">
 		{#each message.photoLinks as photo}
 			<img src={'https://picsum.photos/200/300'} alt="Photo" />
 		{/each}
 	</div>
 
-	<div class="content">{@html message.text.replaceAll('\n', '<br/>')}</div>
+	<div class="mt-2">{@html message.text.replaceAll('\n', '<br/>')}</div>
 	<small class="mt-2 italic text-gray-500">
 		Post feito em {date.toLocaleDateString('pt-BR')} por {message.author} às {date
 			.toLocaleTimeString('pt-BR')
