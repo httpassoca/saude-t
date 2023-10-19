@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
 	import type messages from '../../public/posts.json';
-	import { parseCustomDate } from './utils';
 	import 'photoswipe/style.css';
 	import PhotoSwipeLightbox from 'photoswipe/lightbox';
 
@@ -15,7 +14,7 @@
 		dispatch('filterByTag', { tag });
 	}
 
-	const date = parseCustomDate(message.date);
+	$: date = new Date(message.date);
 	const imageUrlPath = `${
 		import.meta.env.VITE_SUPABASE_URL
 	}/storage/v1/object/public/posts_images/`;
@@ -48,7 +47,9 @@
 		{/each}
 	</div>
 
-	<div class="mt-3">{@html message.text.replaceAll('\n', '<br/>')}</div>
+	<div class:mt-3={message.photos.length} class="textContent">
+		{@html message.text.replaceAll('\n', '<br/>')}
+	</div>
 	<small class="mt-2 italic text-gray-500">
 		Post feito em {date.toLocaleDateString('pt-BR')} por {message.author} às {date
 			.toLocaleTimeString('pt-BR')
@@ -69,3 +70,10 @@
 		{/each}
 	</div>
 </article>
+
+<style>
+	:global(.textContent a) {
+		color: white;
+		border-bottom: 1px solid var(--primary);
+	}
+</style>
