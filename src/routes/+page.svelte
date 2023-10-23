@@ -58,7 +58,7 @@
 			Filtre por uma tag:
 			<select bind:value={tagFiltered} class="h-12 mt-1">
 				<option value={''} selected>Todas</option>
-				{#each [...new Set(messages.flatMap((msg) => msg.tags))] as tag}
+				{#each [...new Set(messages.flatMap((msg) => msg.tags))].sort( (a, b) => a.localeCompare(b, 'pt-BR') ) as tag}
 					<option value={tag}>{tag}</option>
 				{/each}
 			</select>
